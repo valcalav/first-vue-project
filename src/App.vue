@@ -4,7 +4,14 @@
     <!-- <input type="text" ref="name">
     <button @click="handleClick">click me</button> -->
     <div v-if="showModal">
-      <Modal :header='header' :text='text' theme='sale' @close='toggleModal' />
+      <Modal theme='sale' @close='toggleModal'>
+        <template v-slot:links>
+          <a href="#">Sign up now</a>
+          <a href="#">More info here</a>
+        </template>
+        <h1>This is the header</h1>
+        <p>This is the text</p>
+      </Modal>
     </div>
     <button @click="toggleModal">Open modal</button>
 </template>
@@ -29,13 +36,11 @@ export default {
     toggleModal() {
       this.showModal = !this.showModal
     }
+//  handleClick() {
+//    console.log(this.$refs.name)
+//    this.$refs.name.classList.add('active')
+//  }
   }
-  // methods: {
-  //   handleClick() {
-  //     console.log(this.$refs.name)
-  //     this.$refs.name.classList.add('active')
-  //   }
-  // }
 }
 </script>
 
