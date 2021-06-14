@@ -3,7 +3,7 @@
     <p>Welcome</p>
     <!-- <input type="text" ref="name">
     <button @click="handleClick">click me</button> -->
-    <div v-if="showModal">
+    <teleport to=".modals" v-if="showModal">
       <Modal theme='sale' @close='toggleModal'>
         <template v-slot:links>
           <a href="#">Sign up now</a>
@@ -12,8 +12,17 @@
         <h1>This is the header</h1>
         <p>This is the text</p>
       </Modal>
-    </div>
+    </teleport>
+
+    <teleport to=".modals" v-if='showModalTwo'>
+      <Modal @close='toggleModalTwo'>
+        <h1>This is the header of modal2</h1>
+        <p>This is the text of modal2</p>
+      </Modal>
+    </teleport>
+
     <button @click="toggleModal">Open modal</button>
+    <button @click="toggleModalTwo">Open modal 2</button>
 </template>
 
 <script>
@@ -29,12 +38,16 @@ export default {
       title: 'My first Vue App :) !',
       header: 'This is the header prop',
       text: 'This is the text prop',
-      showModal: false
+      showModal: false,
+      showModalTwo: false
     }
   },
   methods: {
     toggleModal() {
       this.showModal = !this.showModal
+    },
+    toggleModalTwo() {
+      this.showModalTwo = !this.showModalTwo
     }
 //  handleClick() {
 //    console.log(this.$refs.name)
@@ -45,7 +58,7 @@ export default {
 </script>
 
 <style>
-#app {
+#app, .modals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
